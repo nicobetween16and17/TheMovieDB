@@ -4,9 +4,9 @@ Home=()=>{
     return(
         <>
         <View>
-            <Text style={{textAlign:'center'}}>Already subbed ?</Text>
+            <Text style={{textAlign:'center'}}>Already signed ?</Text>
         <Button title='Sign in'/>
-            <Text style={{textAlign:'center'}}>Still not subbed yet ?</Text>
+            <Text style={{textAlign:'center'}}>Still not signed yet ?</Text>
         <Button title='Sign up'/>
             
   
