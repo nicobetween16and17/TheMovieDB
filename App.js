@@ -14,13 +14,17 @@ import Home from './components/home';
 import Search from './components/search';
 import Filmdetail from './components/filmDetail';
 import PopandSoon from './components/popular_and_comingSoon';
+import LoginScreen from './components/loginScreen';
+
 
 
 const App= () => {
+  const isLoggedIn = false;
   const isDarkMode = useColorScheme() === 'dark';
   const Tab = createMaterialTopTabNavigator();
   return (
-    <SafeAreaView style={{flex:1}}>
+    isLoggedIn ? (
+      <SafeAreaView style={{flex:1}}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <NavigationContainer initialRouteName='Home'>
       <Tab.Navigator >
@@ -30,6 +34,9 @@ const App= () => {
       </Tab.Navigator>
    </NavigationContainer>
     </SafeAreaView>
+    ) : (
+    <LoginScreen/>)
+    
   );
 };
 

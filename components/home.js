@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { Text,ScrollView,View, Button} from 'react-native';
-Home=()=>{
+import PropTypes from "prop-types";
+
+Home=(props)=>{
+    const loggedIn = {props}
     return(
         <>
         <View>
-            <Text style={{textAlign:'center'}}>Already signed ?</Text>
-        <Button title='Sign in'/>
-            <Text style={{textAlign:'center'}}>Still not signed yet ?</Text>
-        <Button title='Sign up'/>
-            
-  
+            <Text style={{textAlign:'center'}}></Text>
+            <Button title='Sign in'/>
+            <Text style={{textAlign:'center'}}></Text>
+            <Button title='Sign up'/>
         </View>
         </>
     );
