@@ -14,7 +14,6 @@ import Home from './components/home';
 import Search from './components/search';
 import Filmdetail from './components/filmDetail';
 import PopandSoon from './components/popular_and_comingSoon';
-import LoginScreen from './components/loginScreen';
 
 
 
@@ -34,7 +33,7 @@ const App= () => {
           <Tab.Screen name="New" component={PopandSoon}/>
         </Tab.Navigator>
        
-      <LoginScreen/>
+
       
    </NavigationContainer>
     </SafeAreaView>

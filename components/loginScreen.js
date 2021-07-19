@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Button, TextInput, Form} from 'react-native';
+import {View, Text, Button, TextInput } from 'react-native';
 import {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
@@ -9,47 +9,56 @@ const LoginScreen = () => {
   const [userName, setuserName] = useState('');
   const [userAddress, setuserAddress] = useState('');
   const [stayLogged, setstayLogged] = useState(false);
-  const handleNameInput = () => {
-    setuserName(target.value);
-  };
-  const handleMailInput = () => {
-    setuserAddress(target.value);
-  };
+
   const logNewUser = () => {
-    nav.navigate('Home', {userName, userAddress});
+    nav.navigate('Search', {userName, userAddress});
     // TODO  (stayLogged) ??  sauvegarder les login
   };
   const continueUnlogged = () => {
-    nav.navigate('home');
+    nav.navigate('Search');
   };
 
   return (
-    <View>
-      <Text>Sign in :</Text>
-      <Form onSubmit={logNewUser}>
-        <TextInput
-          onChange={handleNameInput}
-          value={userName}
-          placeholder="Your name"
-        />
-        <TextInput
-          onChange={handleMailInput}
-          value={userAddress}
-          placeholder="Your e-mail"
-        />
+    <View style={{
+      padding: 9,
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: stayLogged ? "#34eb83" : "#ffdf87",
+      flex: 1,
+    }}>
+      <Text style={{padding: 10, fontSize: 30}}>Sign in :</Text>
+      <TextInput
+        onChangeText={text => setuserName(text)}
+        value={userName}
+        placeholder="Your name"
+      />
+      <TextInput
+        onChangeText={text => setuserAddress(text)}
+        value={userAddress}
+        placeholder="Your e-mail"
+        
+      />
+      <View style={{
+        flexDirection: 'row',
+        }}>
+        <Text >Remember me : </Text>
         <BouncyCheckbox
           name="stayLogged"
+          fillColor="red"
           value={stayLogged}
-          onPress={value => setstayLogged(!value)}
+          onPress={(e) => setstayLogged(!e)}
         />
-        <Button title="signIn" type="submit">
-          Sign In
-        </Button>
-      </Form>
-      <Button title="continueUnlogged" onPress={continueUnlogged}>
-        Continue without Login
-      </Button>
+      </View>
+        
+      <Button title="Sign In" onPress={logNewUser}/>
+      <Text/>
+      <Text>By signing in, you can receive personalized suggestions and you will be able to save your favorite movies.</Text>
+      <Text style={{
+      flex: 1,
+    }}/>
+      <Button title="Continue without Login" onPress={continueUnlogged} color="#20ab2e"/>
     </View>
   );
 };
+
 export default LoginScreen;

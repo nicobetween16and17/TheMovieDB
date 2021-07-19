@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import { Text,ScrollView,View, Button} from 'react-native';
 import PropTypes from "prop-types";
+import LoginScreen from './loginScreen';
+import { NavigationContainer } from '@react-navigation/native'
+
 
 Home=(props)=>{
     const loggedIn = {props}
     return(
-        <>
-        <View>
-            <Text style={{textAlign:'center'}}></Text>
-            <Button title='Sign in'/>
-            <Text style={{textAlign:'center'}}></Text>
-            <Button title='Sign up'/>
-        </View>
-        </>
+        
+        <LoginScreen/>
     );
 }
 export default Home;
