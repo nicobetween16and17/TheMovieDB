@@ -23,19 +23,22 @@ const App= () => {
   const isDarkMode = useColorScheme() === 'dark';
   const Tab = createMaterialTopTabNavigator();
   return (
-    isLoggedIn ? (
+   
       <SafeAreaView style={{flex:1}}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <NavigationContainer initialRouteName='Home'>
-      <Tab.Navigator >
-        <Tab.Screen name="Home" component={Home}/>
-        <Tab.Screen name="Search" component={Search}/>
-        <Tab.Screen name="New" component={PopandSoon}/>
-      </Tab.Navigator>
+       
+        <Tab.Navigator >
+          <Tab.Screen name="Home" component={Home}/>
+          <Tab.Screen name="Search" component={Search}/>
+          <Tab.Screen name="New" component={PopandSoon}/>
+        </Tab.Navigator>
+       
+      <LoginScreen/>
+      
    </NavigationContainer>
     </SafeAreaView>
-    ) : (
-    <LoginScreen/>)
+    
     
   );
 };
