@@ -3,7 +3,7 @@ import {Text, View, Button, useState} from 'react-native';
 Search = () => {
   const [title, settitle] = useState('');
   const searchMovie = (title) => {
-    // requete
+    // request
   };
   return (
     <View>
