@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {useState} from 'react';
 import { Text,ScrollView,View, Button} from 'react-native';
 import LoginScreen from './loginScreen';
 
