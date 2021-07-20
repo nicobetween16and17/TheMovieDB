@@ -5,7 +5,7 @@ const Home=(props)=>{
     const loggedin = props;
     return(
         <>
-        <View>
+        <View style = {{flex: 1}}>
          <LoginScreen/>
         </View>
         </>
