@@ -13,7 +13,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import Home from './components/home';
 import Search from './components/search';
 import Filmdetail from './components/filmDetail';
-import PopandSoon from './components/popular_and_comingSoon';
+import Pop from './components/pop';
 
 
 const App= () => {
@@ -28,7 +28,7 @@ const App= () => {
         <Tab.Navigator >
           <Tab.Screen name="Home" component={Home}/>
           <Tab.Screen name="Search" component={Search}/>
-          <Tab.Screen name="New" component={PopandSoon}/>
+          <Tab.Screen name="New" component={()=>{<Pop category='popular'/>}}/>
         </Tab.Navigator>
        
 
