@@ -1,7 +1,7 @@
-import React from 'react';
-import {Text, View, Button, useState} from 'react-native';
-Search = () => {
-  const [title, settitle] = useState('');
+import React,{useState} from 'react';
+import {Text, View, Button, TextInput} from 'react-native';
+const Search = () => {
+  const [title, setTitle] = useState('');
   const searchMovie = (title) => {
     // request
   };
@@ -9,8 +9,8 @@ Search = () => {
     <View>
       <Text>Search a movie :</Text>
       <TextInput
-        onChangeText={title => settitle(title)}
-        value={userName}
+        onChangeText={title => setTitle(title)}
+        value={title}
         placeholder="Movie title"
       />
       <Button title="Search movie" onPress={searchMovie(title)} />

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text,ScrollView,View,Button } from 'react-native';
-Filmdetail=()=>{
+const Filmdetail=()=>{
     return(
         <>
         <View>

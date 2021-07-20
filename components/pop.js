@@ -1,4 +1,4 @@
-import React, { useState, Component, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, ScrollView, View, Button, FlatList } from 'react-native';
 
 const Pop = (props) => {

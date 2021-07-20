@@ -28,7 +28,7 @@ const App= () => {
         <Tab.Navigator >
           <Tab.Screen name="Home" component={Home}/>
           <Tab.Screen name="Search" component={Search}/>
-          <Tab.Screen name="New" component={()=>{<Pop category='popular'/>}}/>
+          <Tab.Screen name="New" component={()=> (<Pop category='popular'/>)}/>
         </Tab.Navigator>
        
 
