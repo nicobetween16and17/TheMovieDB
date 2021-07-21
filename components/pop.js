@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Text, ScrollView, View, Button, FlatList } from 'react-native';
 
 const Pop = (props) => {
-    console.log('Start !');
-    console.log('props', props.category)
+    // console.log('Start !');
+    // console.log('props', props.category)
     const key = 'df278855c9e419d222b1ccf697f4f985'
     const API = 'https://api.themoviedb.org/3/movie/'+props.category+'?api_key='+key
     const [liste, setListe] = useState([])
     useEffect(() => {
-         console.log('Effect !');
+        //  console.log('Effect !');
 
         fetch(API)
             .then((response) => response.json())

@@ -1,39 +1,42 @@
 import React from 'react';
-import {View, Text, Button, TextInput} from 'react-native';
+import {View, Text, Button, TextInput, Alert} from 'react-native';
 import {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import PropTypes from 'prop-types';
 
-const LoginScreen = () => {
+const LoginScreen = (props) => {
   const nav = useNavigation();
   const [userName, setuserName] = useState('');
   const [userAddress, setuserAddress] = useState('');
   const [stayLogged, setstayLogged] = useState(false);
 
   //logged -> accueil custom
-  const logNewUser = (userName, userAddress) => {
+  const logNewUser = () => {
     console.log('clic');
-    console.log(stayLogged);
-    if (stayLogged) {
-      const storeUserData = async (userName, userAddress) => {
-        try {
-          await AsyncStorage.setItem('USERNAME', userName);
-          await AsyncStorage.setItem('ADDRESS', userAddress);
-          console.log('storing user data');
-        } catch (e) {
-          console.log('unable to save user data');
-        }
-      };
-      nav.navigate('Home', {userName, stayLogged});
+    console.log(userName, userAddress, stayLogged);
+    if(userName !== ""){
+      nav.navigate('Home');
+      props.getUserData(userName,userAddress, stayLogged)
+    } else {
+      alert("Please entrer a valid name",
+      [
+        {text: 'Yes', onPress: () => console.log('Yes button clicked')},
+        {text: 'No', onPress: () => console.log('No button clicked'), style: 'cancel'},
+      ], 
+      {cancelable: true})
     }
-  };
+    
+    }
+
 
   //non logged -> direction search
   const continueUnlogged = () => {
     nav.navigate('Search');
   };
   const onStartLoading = async () => {
+    console.log("looking for user data");
     try {
       const value = await AsyncStorage.getItem('USERNAME');
       const value2 = await AsyncStorage.getItem('ADDRESS');
@@ -66,6 +69,8 @@ const LoginScreen = () => {
         onChangeText={text => setuserAddress(text)}
         value={userAddress}
         placeholder="Your e-mail"
+        autoCompleteType="email"
+        keyboardType="email-address"
       />
       <View
         style={{
@@ -80,7 +85,7 @@ const LoginScreen = () => {
         />
       </View>
 
-      <Button title="Sign In" onPress={() => logNewUser(userName, userAddress)} />
+      <Button title="Sign In" onPress={logNewUser} />
       <Text />
       <Text>
         By signing in, you can receive personalized suggestions and you will be
@@ -93,7 +98,7 @@ const LoginScreen = () => {
       />
       <Button
         title="Continue without Login"
-        onPress={() =>continueUnlogged}
+        onPress={continueUnlogged}
         color="#20ab2e"
       />
     </View>
@@ -101,3 +106,10 @@ const LoginScreen = () => {
 };
 
 export default LoginScreen;
+
+LoginScreen.propTypes = {
+  getUserData : PropTypes.func
+}
+LoginScreen.defaultProps = {
+  getUserData : () => {}
+}
