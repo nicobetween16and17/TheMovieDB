@@ -27,12 +27,13 @@ useEffect(() => {
 },[hasclick]);
 return (
     <View style={{flex:1,backgroundColor:'white'}}>
-        <Button title={buttonname} onPress={switchCategory}/>
+        
       {hasclick ? (
-        <View style={{flex:1}}><Pop category='upcoming'/></View>
+      
+        <View style={{flex:1}}><Button title={buttonname} onPress={switchCategory}/><Pop category='upcoming'/></View>
       ) : (
     
-        <View style={{flex:1}}><Pop category='popular'/></View>
+        <View style={{flex:1}}><Button title={buttonname} onPress={switchCategory}/><Pop category='popular'/></View>
       )}
     </View>
   )
