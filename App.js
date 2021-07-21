@@ -14,8 +14,18 @@ import Home from './components/home';
 import Search from './components/search';
 import Filmdetail from './components/filmDetail';
 import Pop from './components/pop';
+import Display from './components/AffichageListes';
 
-
+const popPop=()=>{
+  return(
+    <Pop category='popular'/>
+  )
+}
+const popUp=()=>{
+  return(
+    <Pop category='upcoming'/>
+  )
+}
 const App= () => {
   const isLoggedIn = false;
   const isDarkMode = useColorScheme() === 'dark';
@@ -28,7 +38,7 @@ const App= () => {
         <Tab.Navigator >
           <Tab.Screen name="Home" component={Home}/>
           <Tab.Screen name="Search" component={Search}/>
-          <Tab.Screen name="New" component={()=> (<Pop category='popular'/>)}/>
+          <Tab.Screen name="New&Trend" component={Display}/>
         </Tab.Navigator>
        
 
