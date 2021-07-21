@@ -1,27 +1,51 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Text,ScrollView,View, Button} from 'react-native';
 import LoginScreen from './loginScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Home=()=>{   
     const[signed, setsigned] = useState(false);
     const[user, setuser] = useState("");
+    const[address, setaddress] = useState("");
 
-    const handleUserLog = (userName, userAddress, stayLogged) =>{
+
+    // save user prefs
+    useEffect(async () => {
+    console.log("saving user data");
+    
+            try {
+                await AsyncStorage.setItem('USERNAME', user);
+                await AsyncStorage.setItem('ADDRESS', address);
+                console.log('storing user data');
+                const value = await AsyncStorage.getItem('USERNAME');
+                console.log('saved username :', value);
+            } catch (e) {
+            console.log('unable to save user data');
+            }
+        
+    },[user])
+    
+    //retrieving user data
+    useEffect(async () => {
+        try {
+            console.log("retrieving user data");
+            const value = await AsyncStorage.getItem('USERNAME');
+            if (value !== null) {setuser(value)}
+            
+            console.log('user : ', value);
+            }
+        catch (e) {
+        console.log('error while reading value');
+        }
+    },[])
+
+
+    const handleUserLog = (userName,userAddress) =>{
         if(userName !== null){
             setsigned(true);
             setuser(userName)
-        } 
-        if (stayLogged) {
-            const storeUserData = async (userName, userAddress) => {
-              try {
-                console.log('storing user data');
-                await AsyncStorage.setItem('USERNAME', userName);
-                await AsyncStorage.setItem('ADDRESS', userAddress);
-              } catch (e) {
-                console.log('unable to save user data');
-              }
-            }
         }
+        if(userAddress !== null) setaddress(userAddress)
     }
     return(
         <>
@@ -35,7 +59,7 @@ const Home=()=>{
                 {/* <LastSearched/> */}
              </View>
          ):(
-         <LoginScreen getUserData={handleUserLog}/>)}
+         <LoginScreen getUserData={(userName, userAddress, stayLogged)=>handleUserLog(userName, userAddress, stayLogged)}/>)}
         </View>
         </>
     );

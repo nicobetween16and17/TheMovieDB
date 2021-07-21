@@ -1,9 +1,8 @@
 import React from 'react';
 import {View, Text, Button, TextInput, Alert} from 'react-native';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import PropTypes from 'prop-types';
 
 const LoginScreen = (props) => {
@@ -21,34 +20,16 @@ const LoginScreen = (props) => {
       props.getUserData(userName,userAddress, stayLogged)
     } else {
       alert("Please entrer a valid name",
-      [
-        {text: 'Yes', onPress: () => console.log('Yes button clicked')},
-        {text: 'No', onPress: () => console.log('No button clicked'), style: 'cancel'},
-      ], 
       {cancelable: true})
     }
     
-    }
-
+  }
 
   //non logged -> direction search
   const continueUnlogged = () => {
     nav.navigate('Search');
   };
-  const onStartLoading = async () => {
-    console.log("looking for user data");
-    try {
-      const value = await AsyncStorage.getItem('USERNAME');
-      const value2 = await AsyncStorage.getItem('ADDRESS');
-      if (value !== null && value2 !== null) {
-        setuserName(value);
-        setuserAddress(value2);
-        console.log(value, ' // ', value2);
-      }
-    } catch (e) {
-      console.log('error while reading value');
-    }
-  };
+
 
   return (
     <View
@@ -76,7 +57,7 @@ const LoginScreen = (props) => {
         style={{
           flexDirection: 'row',
         }}>
-        <Text>Remember me : </Text>
+        <Text>Receive latest news : </Text>
         <BouncyCheckbox
           isChecked={stayLogged}
           name="stayLogged"
@@ -85,7 +66,7 @@ const LoginScreen = (props) => {
         />
       </View>
 
-      <Button title="Sign In" onPress={logNewUser} />
+      <Button title="Save" onPress={logNewUser} />
       <Text />
       <Text>
         By signing in, you can receive personalized suggestions and you will be
