@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Text,ScrollView,View, Button} from 'react-native';
+import { Text, View, Button} from 'react-native';
 import LoginScreen from './loginScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -9,36 +9,32 @@ const Home=()=>{
     const[address, setaddress] = useState("");
 
 
+    
+    //retrieving user data / tâche asynchrone qui récupère les données enregistrées
+    useEffect(async () => {
+        console.log("retrieving user data");
+        const value = await AsyncStorage.getItem('USERNAME');
+        if (value !== null) {setuser(value); setsigned(true)}
+        //TODO: récupérer la liste des dernières recherches et des favoris
+        console.log('user : ', value);
+    },[])
+    
     // save user prefs
     useEffect(async () => {
     console.log("saving user data");
-    
+    if(user !== null){
             try {
+                console.log('before saving username :', value);
                 await AsyncStorage.setItem('USERNAME', user);
-                await AsyncStorage.setItem('ADDRESS', address);
+                if(address !== null) await AsyncStorage.setItem('ADDRESS', address);
                 console.log('storing user data');
                 const value = await AsyncStorage.getItem('USERNAME');
                 console.log('saved username :', value);
             } catch (e) {
             console.log('unable to save user data');
             }
-        
+    }
     },[user])
-    
-    //retrieving user data
-    useEffect(async () => {
-        try {
-            console.log("retrieving user data");
-            const value = await AsyncStorage.getItem('USERNAME');
-            if (value !== null) {setuser(value)}
-            
-            console.log('user : ', value);
-            }
-        catch (e) {
-        console.log('error while reading value');
-        }
-    },[])
-
 
     const handleUserLog = (userName,userAddress) =>{
         if(userName !== null){

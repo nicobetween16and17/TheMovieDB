@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, Button, TextInput, Alert} from 'react-native';
-import {useState, useEffect} from 'react';
+import {useState } from 'react';
 import {useNavigation} from '@react-navigation/native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import PropTypes from 'prop-types';
