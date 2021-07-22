@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text, Button, TextInput, Image} from 'react-native';
-import {useState } from 'react';
+import {useEffect } from 'react';
 import SQLite, { openDatabase } from 'react-native-sqlite-storage';
 
 
-const db = SQLite.openDatabase({ 
+const db = SQLite.openDatabase({
     name: 'movieDB.db',
     location: 'default',
     createFromLocation: '~movieDB.db' 
