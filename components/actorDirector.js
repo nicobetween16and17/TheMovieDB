@@ -21,7 +21,7 @@ const ActorDirector = (props) => {
                 <Text>Acteurs: {actors}</Text>
             </View>
             <Button title='Retour' onPress={handleBack}
-                    color={} />
+                     />
         </View>
     );
 }

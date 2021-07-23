@@ -1,17 +1,27 @@
 import React from 'react';
 import SQLite, { openDatabase } from 'react-native-sqlite-storage';
 
-const db = openDatabase({ 
-    name: 'movieDB.db',
-    location: 'default',
-    createFromLocation: '~www/movieDB.db' 
-    },
-    () => {console.log("open successful");}, // execute if success
-    error => {console.log(error)} // execute if error
-    );
+const openDb = () => {
+    const db = SQLite.openDatabase({ 
+        name: 'movieDB.db',
+        location: 'default',
+        createFromLocation: '~www/movieDB.db' 
+        },
+        () => {console.log("open successful");}, // execute if success
+        error => {console.log(error)} // execute if error
+        );
+    return db;
+}
+
+//todo closedb()
+const closeDb = (db) => {
+    db.close()
+    return db
+}
+
 //CRUD
 //exécuter ces méthodes dans un useEffect (pcq taches asynch)
-const createMovieTable = ()=> {
+const createMovieTable = () => {
     db.transaction((tx) => {
         tx.executeSql(
             "CREATE TABLE IF NOT EXISTS "
@@ -25,7 +35,7 @@ const createMovieTable = ()=> {
         )
     })
 }
-const insertData = async (tabName, data) => {
+const insertData = async (db,tabName, data) => {
     if(data == null) {
         alert("Problem with the JSON data - null ")
     } else {
@@ -42,7 +52,7 @@ const insertData = async (tabName, data) => {
 }
 
 // parcourt la table et renvoie les films sous forme de liste d'objets JSON
-const readTable = (tabName) => {
+const readTable = (db, tabName) => {
     const movieList = [];
     try {
         db.transaction((tx)=>{
@@ -62,7 +72,7 @@ const readTable = (tabName) => {
     return movieList;
 };
 
-const deleteFromFavTab = (id) => {
+const deleteFromFavTab = (db, id) => {
     try {
         db.transaction((tx)=>{
             tx.executeSql(
@@ -76,4 +86,11 @@ const deleteFromFavTab = (id) => {
 
 
 const DbHelper = () => {}
-export default DbHelper
+export default {
+    createMovieTable,
+    insertData,
+    readTable,
+    deleteFromFavTab, 
+    openDb,
+    closeDb
+}

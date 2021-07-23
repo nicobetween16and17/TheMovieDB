@@ -54,7 +54,7 @@ const Home=()=>{
                 <Text style={{fontSize:25, fontWeight:"bold"}}>Welcome, {user}!</Text>
                 <View style={{height:30}}/>
                 <Text>Your favorites :</Text>
-                <Favorites/>
+                {}<Favorites />
                 <View style={{height:30}}/>
                 <Text>Your last seen :</Text>
                 <LastSeen/>

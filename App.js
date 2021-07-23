@@ -14,12 +14,15 @@ import Home from './components/home';
 import Search from './components/search';
 import Filmdetail from './components/filmDetail';
 import Pop from './components/pop';
+import { useState } from 'react/cjs/react.development';
 
 
 const App= () => {
   const isLoggedIn = false;
   const isDarkMode = useColorScheme() === 'dark';
   const Tab = createMaterialTopTabNavigator();
+  const [navChoice, setNavChoice] = useState('popular')
+  const destination = () => (<Pop category={navChoice}/>)
   return (
     <SafeAreaView style= {{flex:1}}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
@@ -28,12 +31,10 @@ const App= () => {
         <Tab.Navigator >
           <Tab.Screen name="Home" component={Home}/>
           <Tab.Screen name="Search" component={Search}/>
-          <Tab.Screen name="New" component={()=> (<Pop category='popular'/>)}/>
+          <Tab.Screen name="New" component={destination}/>
         </Tab.Navigator>
-       
-
-      
-   </NavigationContainer>
+             
+      </NavigationContainer>
     </SafeAreaView>
   );
 };

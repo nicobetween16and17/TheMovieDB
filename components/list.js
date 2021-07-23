@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Text,ScrollView,View,Button } from 'react-native';
 const List=(props)=>{
-    ListJSX = props.map()
+    const ListJSX = props.map()
     return(
-        <>
-        {ListJSX}
-        </>
+        <View>
+            {ListJSX}
+        </View>
     );
 }
 export default  List;
